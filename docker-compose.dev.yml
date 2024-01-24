@@ -35,9 +35,7 @@ services:
         image: bank-frontend-dev
         build:
             context: frontend
-            dockerfile: Dockerfile.dev
-        volumes:
-            - ./frontend:/app
+            dockerfile: Dockerfile
     nginx:
         container_name: bank-nginx-dev
         image: bank-nginx-dev
