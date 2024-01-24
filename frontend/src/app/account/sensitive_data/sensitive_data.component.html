@@ -1,0 +1,11 @@
+<div>
+    <h2>!! Dane wrażliwe !!</h2>
+
+    <div *ngIf="dataVisible" class="data-card">
+        <button (click)="hideData()">Ukryj</button>
+        <p>Id Number: {{ idNumber }}</p>
+        <p>Credit Card Number: {{ creditCardNumber }}</p>
+    </div>
+
+    <button *ngIf="!dataVisible" (click)="showData()">Pokaż</button>
+</div>

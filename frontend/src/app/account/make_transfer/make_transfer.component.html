@@ -1,0 +1,25 @@
+<div>
+    <h2>Menu przelewu</h2>
+
+    <div *ngIf="transferSuccess" class="success-card">
+        <p>Przelew wykonany!</p>
+        <button (click)="redirectToAccount()">Powrót na stronę konta</button>
+    </div>
+
+    <form [formGroup]="transferForm" *ngIf="!transferSuccess">
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+        <label for="senderAccountNumber">Nr konta z którego zostaną pobrane pieniądze:</label>
+        <input type="text" id="senderAccountNumber" formControlName="senderAccountNumber" required>
+
+        <label for="receiverAccountNumber">Nr konta odbiorcy:</label>
+        <input type="text" id="receiverAccountNumber" formControlName="receiverAccountNumber" required>
+
+        <label for="transferAmount">Kwota przelewu (w formacie #.##):</label>
+        <input type="text" id="transferAmount" formControlName="transferAmount" required>
+
+        <label for="title">Tytuł przelewu:</label>
+        <input type="text" id="title" formControlName="title" required>
+
+        <button type="button" (click)="makeTransfer()">Wykonaj przelew</button>
+    </form>
+</div>

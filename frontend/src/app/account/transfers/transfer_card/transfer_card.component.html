@@ -1,0 +1,35 @@
+<div *ngIf="transfer" class="transfer-card">
+    <div class="party-info sender">
+        <strong>Nadawca</strong>
+        <div>
+            <p>
+                Nr Konta: {{ updateDisplayAccountNumber(transfer.senderAccountNumber, senderShown) }}
+            </p>
+            <button class="toggle-button" (click)="toggleSenderAccountNumberVisibility()">
+                {{ senderShown ? 'Ukryj' : 'Pokaż' }}
+            </button>
+        </div>
+        <div>Nazwa: {{ transfer.senderName }}</div>
+    </div>
+
+    <div class="transfer-info">
+        <div class="price" [class.incoming]="transfer.incoming">
+            {{ transfer.incoming ? '+' : '-' }}{{ transfer.transferAmount / 100 | currency:'USD':'symbol':'1.2-2' }}
+        </div>
+        <div class="title">{{ transfer.title }}</div>
+        <div class="date">{{ transfer.timestamp | date: 'short' }}</div>
+    </div>
+
+    <div class="party-info receiver">
+        <strong>Odbiorca</strong>
+        <div>
+            <p>
+                Nr Konta: {{ updateDisplayAccountNumber(transfer.receiverAccountNumber, receiverShown) }}
+            </p>
+            <button class="toggle-button" (click)="toggleReceiverAccountNumberVisibility()">
+                {{ receiverShown ? 'Ukryj' : 'Pokaż' }}
+            </button>
+        </div>
+        <div>Nazwa: {{ transfer.receiverName }}</div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+# Required volumes:
+#    - "./backend:/app"
+#    - "./.cache/backend/.gradle:/app/.gradle"
+#    - "./.cache/backend/build:/app/build"
+
+FROM gradle:8.2-jdk17-alpine
+
+WORKDIR /app
+
+ENTRYPOINT ["gradle", "bootRun"]
+
+EXPOSE 8080
+EXPOSE 5005

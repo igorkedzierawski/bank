@@ -1,0 +1,56 @@
+.account-info-container {
+    text-align: center;
+    padding: 10px;
+}
+
+.info-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.account-number {
+    font-size: 16px;
+    margin: 0;
+}
+
+.toggle-button {
+    font-size: 12px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: #0056b3;
+    }
+}
+
+.balance {
+    margin-bottom: 10px;
+
+    &.positive-balance {
+        color: green;
+    }
+
+    &.zero-balance {
+        color: red;
+    }
+
+    .balance-label {
+        font-size: 18px;
+        font-weight: normal;
+    }
+
+    .balance-amount {
+        font-size: 36px;
+        font-weight: bold;
+    }
+}
+.error-message {
+    color: red;
+    margin-bottom: 10px;
+}

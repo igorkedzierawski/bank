@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+    backend:
+        container_name: bank-backend-dev
+        image: bank-backend-dev
+        build:
+            context: backend
+            dockerfile: Dockerfile.dev
+        depends_on:
+            db:
+                condition: service_healthy
+        env_file:
+            - bank_db_credentails.env
+            - rsa_keys.env
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/bank
+        ports:
+            - "5005:5005"
+        volumes:
+            - "./backend:/app"
+            - "./.cache/backend/.gradle:/app/.gradle"
+            - "./.cache/backend/build:/app/build"
+    db:
+        container_name: bank-db-dev
+        image: postgres:16.1-alpine3.18
+        environment:
+            - POSTGRES_DB=bank
+        env_file:
+            - bank_db_credentails.env
+        healthcheck:
+            test: "pg_isready -U bank"
+    frontend:
+        container_name: bank-frontend-dev
+        image: bank-frontend-dev
+        build:
+            context: frontend
+            dockerfile: Dockerfile.dev
+        volumes:
+            - ./frontend:/app
+    nginx:
+        container_name: bank-nginx-dev
+        image: bank-nginx-dev
+        build:
+            context: nginx
+            dockerfile: Dockerfile
+        depends_on:
+            - backend
+            - frontend
+        ports:
+            - "443:443"

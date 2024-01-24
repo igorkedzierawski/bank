@@ -1,0 +1,53 @@
+<div class="transfers-list">
+    <h3>Lista przelewów</h3>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    
+    <transfer-card *ngFor="let transfer of transfers" [transfer]="transfer">
+
+    </transfer-card>
+        <!-- <div class="party-info sender">
+            <strong>Nadawca</strong>
+            <div>
+                <p *ngIf="!hidesender; else hiddenSenderAccountNumber">
+                    Nr Konta: {{ transfer.senderAccountNumber }}
+                </p>
+                <ng-template #hiddenSenderAccountNumber>
+                    Nr Konta: {{ transfer.senderAccountNumber.slice(-4) }}
+                </ng-template>
+                <button class="toggle-button" (click)="toggleSenderAccountNumberVisibility()">
+                    {{ hideSEnder ? "Ukryj" : "Pokaż" }}
+                </button>
+            </div>
+            <div>Nazwa: {{ transfer.senderName }}</div>
+        </div>
+
+        <div class="transfer-info">
+            <div class="price" [class.incoming]="transfer.incoming">
+                {{ transfer.incoming ? '+' : '-' }}{{ transfer.transferAmount / 100 | currency:'USD':'symbol':'1.2-2' }}
+            </div>
+            <div class="title">{{ transfer.title }}</div>
+            <div class="date">{{ transfer.timestamp | date: 'short' }}</div>
+        </div>
+
+        <div class="party-info receiver">
+            <strong>Odbiorca</strong>
+            <div>
+                <p *ngIf="!hideReceiver; else hiddenReceiverAccountNumber">
+                    Nr Konta: {{ transfer.receiverAccountNumber }}
+                </p>
+                <ng-template #hiddenReceiverAccountNumber>
+                    Nr Konta: {{ transfer.receiverAccountNumber.slice(-4) }}
+                </ng-template>
+                <button class="toggle-button" (click)="toggleAccountReceiverNumberVisibility()">
+                    {{ hideReceiver ? "Ukryj" : "Pokaż" }}
+                </button>
+            </div>
+            <div>Nazwa: {{ transfer.receiverName }}</div>
+        </div> -->
+
+    <div class="pagination">
+        <button [disabled]="currentPage <= 1" (click)="onPageChange(currentPage - 1)">Previous</button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button [disabled]="currentPage >= totalPages" (click)="onPageChange(currentPage + 1)">Next</button>
+    </div>
+</div>

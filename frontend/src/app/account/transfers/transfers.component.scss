@@ -1,0 +1,38 @@
+.transfers-list {
+    max-width: 800px;
+    margin: 0 auto;
+
+    h3 {
+        text-align: center;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        align-items: center;
+        margin-top: 10px;
+
+        button {
+            padding: 5px 8px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+
+            &:disabled {
+                background-color: #ccc;
+                cursor: not-allowed;
+            }
+
+            &:hover:not(:disabled) {
+                background-color: #0056b3;
+            }
+        }
+    }
+
+    .error-message {
+        color: red;
+        margin-bottom: 10px;
+    }
+}

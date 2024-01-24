@@ -1,0 +1,17 @@
+<div>
+    <h3>Konto Główne</h3>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    <div class="account-info-container">
+        <p class="balance" *ngIf="accountInfo"
+            [ngClass]="{'positive-balance': accountInfo.balance > 0, 'zero-balance': accountInfo.balance === 0}">
+            <span class="balance-label">Stan Konta:</span> <span class="balance-amount">{{ accountInfo.balance / 100 |
+                currency:'USD':'symbol':'1.2-2' }}</span>
+        </p>
+        <div class="info-wrapper">
+            <p class="account-number">Numer Konta: {{ displayAccountNumber }}</p>
+            <button class="toggle-button" (click)="toggleAccountNumberVisibility()">
+                {{ this.showAllCharacters ? "Ukryj" : "Pokaż" }}
+            </button>
+        </div>
+    </div>
+</div>
