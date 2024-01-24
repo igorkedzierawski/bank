@@ -14,31 +14,36 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ChangePasswordTokenService {
 
-    private final ChangePasswordTokenRepository transferRepo;
+    private final ChangePasswordTokenRepository tokenRepo;
     private final ClientRepository clientRepo;
 
     public static long EXPIRY_TIME_MINUTES = 10;
 
     public ChangePasswordToken generateByClientLogin(String login) {
+        Optional<ChangePasswordToken> maybeToken =
+                tokenRepo.findAll().stream().filter(token -> login.equals(token.getClient().getLogin())).findFirst();
+        if(maybeToken.isPresent()) {
+            return maybeToken.get();
+        }
         Client client = clientRepo.findByLogin(login)
                 .orElseThrow(() -> new UsernameNotFoundException("Nie znaleziono klienta o loginie " + login));
         ChangePasswordToken changePasswordToken = new ChangePasswordToken(client, UUID.randomUUID().toString(),
                 System.currentTimeMillis() + EXPIRY_TIME_MINUTES * 60_000);
-        return transferRepo.save(changePasswordToken);
+        return tokenRepo.save(changePasswordToken);
     }
 
     public Optional<ChangePasswordToken> findToken(String token) {
-        return transferRepo.findByToken(token);
+        return tokenRepo.findByToken(token);
     }
 
     @Transactional
     public void destroyToken(String token) {
-        transferRepo.findByToken(token).ifPresent(transferRepo::delete);
+        tokenRepo.findByToken(token).ifPresent(tokenRepo::delete);
     }
 
     @Transactional
     public void destroyToken(ChangePasswordToken token) {
-        transferRepo.delete(token);
+        tokenRepo.delete(token);
     }
 
 }
